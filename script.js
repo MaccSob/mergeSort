@@ -1,13 +1,23 @@
-function mergeSort(left, right) {
-    let start = [1,2,3,4,5,6];
-    let mid = Math.ceil(start.length / 2);     
-    let end = [];
-     left = start.slice(0, mid)
- right = start.slice(mid)
- console.log(left);
- console.log(right);
- console.log(end);
+function merge(l, r) {
+    let end = [] 
+    while (l.length && r.length) {
+      if (l[0] < r[0]) {
+        end.push(l.shift())
+      } else {
+        end.push(r.shift())
+      }
+    }
+    return [...end, ...l,  ...r];
+  }
+  function mergeSorting(arr) {
+    if (arr.length <= 1) return arr
+    let mid = Math.floor(arr.length / 2)
+    let left = mergeSorting(arr.slice(0, mid))
+    let right = mergeSorting(arr.slice(mid))
+    return merge(left, right)
+  }
 
- }
 
-mergeSort()
+
+  console.log(mergeSorting([3, 2, 1, 13, 8, 5, 0, 1]));
+  console.log(mergeSorting([105, 79, 100, 110]));
